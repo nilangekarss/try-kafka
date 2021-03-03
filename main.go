@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-        trykafka "github.com/nilangekarss/try-kafka"
+        trykafka "github.com/nilangekarss/trykafka"
 )
 
 const (
