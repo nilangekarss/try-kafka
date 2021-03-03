@@ -1,3 +1,3 @@
-module github.com/nilangekarss/try-kafka.git
+module github.com/nilangekarss/trykafka
 
 go 1.12
