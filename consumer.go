@@ -1,4 +1,4 @@
-package try-kafka
+package trykafka
 
 import (
 	"context"
