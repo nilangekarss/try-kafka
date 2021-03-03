@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-        trykafka "github.com/nilangekarss/trykafka"
+	"github.com/nilangekarss/trykafka"
 )
 
 const (
