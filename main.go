@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+        trykafka "github.com/nilangekarss/try-kafka"
 )
 
 const (
@@ -17,7 +18,7 @@ func main() {
 	// produce messages in a new go routine, since
 	// both the produce and consume functions are
 	// blocking
-	go produce(ctx)
-	consume(ctx)
+	go trykafka.Produce(ctx)
+	trykafka.Consume(ctx)
 }
 

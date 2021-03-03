@@ -1,4 +1,4 @@
-package main
+package try-kafka
 
 import (
 	"context"
@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-func produce(ctx context.Context) {
+func Produce(ctx context.Context) {
 	// initialize a counter
 	i := 0
 

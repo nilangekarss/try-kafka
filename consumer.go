@@ -1,4 +1,4 @@
-package main
+package try-kafka
 
 import (
 	"context"
@@ -6,7 +6,7 @@ import (
 	"github.com/confluentinc/confluent-kafka-go/kafka"
 )
 
-func consume(ctx context.Context) {
+func Consume(ctx context.Context) {
 	// initialize a new reader with the brokers and topic
 	// the groupID identifies the consumer and prevents
 	// it from receiving duplicate messages
