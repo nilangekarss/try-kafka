@@ -2,6 +2,8 @@ package trykafka
 import (
 	"context"
 	"fmt"
+	"time"
+
 	//      "gopkg.in/confluentinc/confluent-kafka-go.v1/kafka"
 	"github.com/confluentinc/confluent-kafka-go/kafka"
 )
@@ -9,6 +11,7 @@ import (
 func Produce(ctx context.Context) {
 
 	p, err := kafka.NewProducer(&kafka.ConfigMap{"bootstrap.servers": "localhost"})
+
 	if err != nil {
 		panic(err)
 	}
@@ -31,12 +34,18 @@ func Produce(ctx context.Context) {
 
 	// Produce messages to topic (asynchronously)
 	topic := "myTopic"
-	for _, word := range []string{"Welcome", "to", "the", "Confluent", "Kafka", "Golang", "client"} {
-		p.Produce(&kafka.Message{
-			TopicPartition: kafka.TopicPartition{Topic: &topic, Partition: kafka.PartitionAny},
-			Value:          []byte(word),
-		}, nil)
+	i := 0
+	for i < 6 {
+		for _, word := range []string{"Welcome", "to", "the", "Confluent", "Kafka", "Golang", "client"} {
+			p.Produce(&kafka.Message{
+				TopicPartition: kafka.TopicPartition{Topic: &topic, Partition: kafka.PartitionAny},
+				Value:          []byte(word),
+			}, nil)
+		}
+		time.Sleep(time.Second * 20)
+		i++
 	}
+
 
 	// Wait for message deliveries before shutting down
 	p.Flush(15 * 1000)
