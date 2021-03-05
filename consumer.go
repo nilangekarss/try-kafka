@@ -2,6 +2,8 @@ package trykafka
 import (
 	"context"
 	"fmt"
+	"time"
+
 	//      "gopkg.in/confluentinc/confluent-kafka-go.v1/kafka"
 	"github.com/confluentinc/confluent-kafka-go/kafka"
 )
@@ -19,8 +21,10 @@ func Consume(ctx context.Context) {
 		panic(err)
 	}
 
-	c.SubscribeTopics([]string{"myTopic", "^aRegex.*[Tt]opic"}, nil)
-
+	//c.SubscribeTopics([]string{"myTopic", "^aRegex.*[Tt]opic"}, nil)
+	c.SubscribeTopics([]string{"myTopic"}, nil)
+	cgmetadata, _ := c.GetConsumerGroupMetadata()
+	fmt.Println("Consumer group metadata associated with consuner is %#v", cgmetadata)
 	for {
 		msg, err := c.ReadMessage(-1)
 		if err == nil {
@@ -29,6 +33,8 @@ func Consume(ctx context.Context) {
 			// The client will automatically try to recover from all errors.
 			fmt.Printf("Consumer error: %v (%v)\n", err, msg)
 		}
+		fmt.Println("Consumer sleeping for 2 seconds")
+		time.Sleep(time.Second * 2)
 	}
 
 	c.Close()
