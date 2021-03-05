@@ -42,7 +42,7 @@ func Produce(ctx context.Context) {
 				Value:          []byte(word),
 			}, nil)
 		}
-		time.Sleep(time.Second * 20)
+		time.Sleep(time.Second * 5)
 		i++
 	}
 

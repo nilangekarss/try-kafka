@@ -33,8 +33,8 @@ func Consume(ctx context.Context) {
 			// The client will automatically try to recover from all errors.
 			fmt.Printf("Consumer error: %v (%v)\n", err, msg)
 		}
-		fmt.Println("Consumer sleeping for 2 seconds")
-		time.Sleep(time.Second * 2)
+		fmt.Println("Consumer sleeping for 5 seconds")
+		time.Sleep(time.Second * 5)
 	}
 
 	c.Close()
