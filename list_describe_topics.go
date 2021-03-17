@@ -16,6 +16,15 @@ func DescribeTopic(ctx context.Context){
 	}
 	resourceType, err := confkafka.ResourceTypeFromString("topic")
 	resourceName := "users3"
+
+	metadata, merr := a.GetMetadata(&resourceName, false, 100)
+	if merr != nil {
+		fmt.Printf("Failed to get metadata for topic: %s\n", err)
+		os.Exit(1)
+	}
+
+	fmt.Println("metadata for topics %#v", metadata.Topics)
+
 	ctxt, cancel := context.WithCancel(ctx)
 	defer cancel()
 	dur, _ := time.ParseDuration("20s")
