@@ -18,12 +18,19 @@ func DescribeTopic(ctx context.Context){
 	resourceName := "users3"
 
 	metadata, merr := a.GetMetadata(&resourceName, false, 100)
+
 	if merr != nil {
 		fmt.Printf("Failed to get metadata for topic: %s\n", err)
 		os.Exit(1)
 	}
 
 	fmt.Println("metadata for topics %#v", metadata.Topics)
+	for k,v := range metadata.Topics{
+		fmt.Println("k and v is %s %#v", k,v)
+		for index, partitions := range v.Partitions{
+			fmt.Println("index and list of partitions are %s %#v", index, partitions)
+		}
+	}
 
 	ctxt, cancel := context.WithCancel(ctx)
 	defer cancel()
