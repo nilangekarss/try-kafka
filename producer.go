@@ -1,4 +1,5 @@
 package trykafka
+
 import (
 	"context"
 	"fmt"
@@ -9,6 +10,8 @@ import (
 )
 
 func Produce(ctx context.Context) {
+
+
 
 	p, err := kafka.NewProducer(&kafka.ConfigMap{"bootstrap.servers": "localhost"})
 
