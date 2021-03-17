@@ -5,7 +5,7 @@ import (
 	"time"
 	//      "gopkg.in/confluentinc/confluent-kafka-go.v1/kafka"
 	"github.com/confluentinc/confluent-kafka-go/kafka"
-	kafkago "github.com/segmentio/kafka-go"
+	//kafkago "github.com/segmentio/kafka-go"
 )
 
 

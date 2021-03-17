@@ -9,11 +9,11 @@ import (
 
 func CreateTopic(ctx context.Context) {
 
-	conn1, err := kafkago.DialLeader(ctx, "tcp", "localhost:9092", "topic-swapnil", 3)
-	if err != nil {
-		panic(err.Error())
-	}
-	defer conn1.Close()
+//	conn1, err := kafkago.DialLeader(ctx, "tcp", "localhost:9092", "topic-swapnil", 3)
+//	if err != nil {
+//		panic(err.Error())
+//	}
+//	defer conn1.Close()
 
 	conn, err := kafkago.Dial("tcp", "localhost:9092")
 	if err != nil {
