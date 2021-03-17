@@ -14,6 +14,7 @@ func main() {
 	// blocking
 	//go trykafka.Produce(ctx)
 	//trykafka.Consume(ctx)
-	trykafka.CreateTopic(ctx)
+	//trykafka.CreateTopic(ctx)
+	trykafka.DescribeTopic(ctx)
 }
 
