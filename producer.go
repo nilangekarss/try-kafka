@@ -32,6 +32,7 @@ func Produce(ctx context.Context) {
 		}
 	}()
 
+	
 	// Produce messages to topic (asynchronously)
 	topic := "myTopic"
 	i := 0

@@ -3,13 +3,35 @@ import (
 	"context"
 	"fmt"
 	"time"
-
 	//      "gopkg.in/confluentinc/confluent-kafka-go.v1/kafka"
 	"github.com/confluentinc/confluent-kafka-go/kafka"
+	kafkago "github.com/segmentio/kafka-go"
 )
 
 
 func Consume(ctx context.Context) {
+
+	conn, err := kafkago.Dial("tcp", "localhost:9092")
+	if err != nil {
+		panic(err.Error())
+	}
+	defer conn.Close()
+
+	partitions, err := conn.ReadPartitions()
+	fmt.Println("partitions are %#v", partitions)
+	if err != nil {
+		panic(err.Error())
+	}
+
+	m := map[string]struct{}{}
+
+	for _, p := range partitions {
+		m[p.Topic] = struct{}{}
+		fmt.Println("printign p value %#v", p)
+	}
+	for k := range m {
+		fmt.Println("Printing partitions: %v", k)
+	}
 
 	c, err := kafka.NewConsumer(&kafka.ConfigMap{
 		"bootstrap.servers": "localhost",
