@@ -1,8 +1,8 @@
 package trykafka
+
 import (
 	"context"
 	"fmt"
-	"time"
 	//      "gopkg.in/confluentinc/confluent-kafka-go.v1/kafka"
 	"github.com/confluentinc/confluent-kafka-go/kafka"
 	//kafkago "github.com/segmentio/kafka-go"
@@ -27,15 +27,15 @@ func Consume(ctx context.Context) {
 	fmt.Println("Consumer group metadata associated with consumer is %#v", cgmetadata)
 	for {
 		msg, err := c.ReadMessage(-1)
-		fmt.Printf("msg is %#v", &msg)
+		fmt.Printf("msg is %#v", msg)
 		if err == nil {
 			fmt.Printf("Message on %s: %s\n", msg.TopicPartition, string(msg.Value))
 		} else {
 			// The client will automatically try to recover from all errors.
 			fmt.Printf("Consumer error: %v (%v)\n", err, msg)
 		}
-		fmt.Println("Consumer sleeping for 5 seconds")
-		time.Sleep(time.Second * 5)
+		//fmt.Println("Consumer sleeping for 5 seconds")
+		//time.Sleep(time.Second * 5)
 	}
 
 	c.Close()
