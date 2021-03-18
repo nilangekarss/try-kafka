@@ -19,7 +19,7 @@ func getAllTopics(admin *confkafka.AdminClient) []string{
 	keys := make([]string, 0, len(topicsdetail))
 	for k := range topicsdetail {
 		keys = append(keys, k)
-		fmt.Println("name of topic is : %s", k)
+		fmt.Printf("\nname of topic is : %s", k)
 	}
 return keys
 }
@@ -35,7 +35,7 @@ func DescribeTopic(ctx context.Context){
 	resourceName := "users3"
 
 	topics := getAllTopics(a)
-	fmt.Println("Topics associated with broker are : %v", topics)
+	fmt.Printf("\nTopics associated with broker are : %v", topics)
 
 	metadata, merr := a.GetMetadata(&resourceName, false, 100)
 
@@ -44,14 +44,14 @@ func DescribeTopic(ctx context.Context){
 		os.Exit(1)
 	}
 
-	fmt.Println("metadata for topics %#v", metadata.Topics)
+	fmt.Printf("\nmetadata for topics %#v", metadata.Topics)
 	for k,v := range metadata.Topics{
-		fmt.Println("k and v is %s %#v", k,v)
+		fmt.Printf("\nk and v is %s %#v", k,v)
 		numofpartitions := len(v.Partitions)
-		fmt.Println("num of partitions for topic %s are %d", k, numofpartitions)
+		fmt.Printf("\nnum of partitions for topic %s are %d", k, numofpartitions)
 		for index, partitions := range v.Partitions{
-			fmt.Println("id of partition is %d", partitions.ID)
-			fmt.Println("index and list of partitions are %s %#v", index, partitions)
+			fmt.Printf("\nid of partition is %d", partitions.ID)
+			fmt.Printf("\nindex and list of partitions are %s %#v", index, partitions)
 		}
 	}
 
