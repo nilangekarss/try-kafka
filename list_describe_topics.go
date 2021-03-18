@@ -8,15 +8,35 @@ import (
 	"time"
 )
 
+func getAllTopics(admin *confkafka.AdminClient) []string{
+	mdata, terr := admin.GetMetadata(nil,true, 100)
+	if terr != nil {
+		fmt.Printf("Failed to get metadata for all topics: %s\n", terr)
+		os.Exit(1)
+	}
+	topicsdetail := mdata.Topics
+	//mymap := make(map[int]string)
+	keys := make([]string, 0, len(topicsdetail))
+	for k := range topicsdetail {
+		keys = append(keys, k)
+		fmt.Println("name of topic is : %s", k)
+	}
+return keys
+}
+
 func DescribeTopic(ctx context.Context){
 	a, err := confkafka.NewAdminClient(&confkafka.ConfigMap{"bootstrap.servers": "localhost"})
 	if err != nil {
 		fmt.Printf("Failed to create Admin client: %s\n", err)
 		os.Exit(1)
 	}
+	//here specify the resource type "any/topic/group/broker/else(becomes unknown)"
 	resourceType, err := confkafka.ResourceTypeFromString("topic")
 	resourceName := "users3"
 
+	topics := getAllTopics(a)
+	fmt.Println("Topics associated with broker are : %v", topics)
+	
 	metadata, merr := a.GetMetadata(&resourceName, false, 100)
 
 	if merr != nil {
