@@ -24,9 +24,9 @@ func Consume(ctx context.Context) {
 	}
 
 	//c.SubscribeTopics([]string{"myTopic", "^aRegex.*[Tt]opic"}, nil)
-	c.SubscribeTopics([]string{"myTopic"}, nil)
+	c.SubscribeTopics([]string{"users3"}, nil)
 	cgmetadata, _ := c.GetConsumerGroupMetadata()
-	fmt.Println("Consumer group metadata associated with consuner is %#v", cgmetadata)
+	fmt.Println("Consumer group metadata associated with consumer is %#v", cgmetadata)
 	for {
 		msg, err := c.ReadMessage(-1)
 		if err == nil {
