@@ -11,8 +11,6 @@ import (
 
 func Consume(ctx context.Context) {
 
-
-
 	c, err := kafka.NewConsumer(&kafka.ConfigMap{
 		"bootstrap.servers": "localhost",
 		"group.id":          "myGroup",
@@ -29,6 +27,7 @@ func Consume(ctx context.Context) {
 	fmt.Println("Consumer group metadata associated with consumer is %#v", cgmetadata)
 	for {
 		msg, err := c.ReadMessage(-1)
+		fmt.Printf("msg is %#v", &msg)
 		if err == nil {
 			fmt.Printf("Message on %s: %s\n", msg.TopicPartition, string(msg.Value))
 		} else {
