@@ -36,7 +36,7 @@ func DescribeTopic(ctx context.Context){
 
 	topics := getAllTopics(a)
 	fmt.Println("Topics associated with broker are : %v", topics)
-	
+
 	metadata, merr := a.GetMetadata(&resourceName, false, 100)
 
 	if merr != nil {
@@ -47,7 +47,10 @@ func DescribeTopic(ctx context.Context){
 	fmt.Println("metadata for topics %#v", metadata.Topics)
 	for k,v := range metadata.Topics{
 		fmt.Println("k and v is %s %#v", k,v)
+		numofpartitions := len(v.Partitions)
+		fmt.Println("num of partitions for topic %s are %d", k, numofpartitions)
 		for index, partitions := range v.Partitions{
+			fmt.Println("id of partition is %d", partitions.ID)
 			fmt.Println("index and list of partitions are %s %#v", index, partitions)
 		}
 	}
@@ -66,11 +69,15 @@ func DescribeTopic(ctx context.Context){
 	// Print results
 	for _, result := range results {
 		fmt.Printf("%s %s: %s:\n", result.Type, result.Name, result.Error)
+		//swapnil commented for loop
+		/*
 		for _, entry := range result.Config {
 			// Truncate the value to 60 chars, if needed, for nicer formatting.
 			fmt.Printf("%60s = %-60.60s   %-20s Read-only:%v Sensitive:%v\n",
 				entry.Name, entry.Value, entry.Source,
 				entry.IsReadOnly, entry.IsSensitive)
 		}
+
+		 */
 	}
 }
