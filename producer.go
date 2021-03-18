@@ -27,13 +27,13 @@ func Produce(ctx context.Context) {
 				if ev.TopicPartition.Error != nil {
 					fmt.Printf("Delivery failed: %v\n", ev.TopicPartition)
 				} else {
-					fmt.Printf("Delivered message to %v\n", ev.TopicPartition)
+					fmt.Printf("Delivered message to partition%d and offset %d\n", ev.TopicPartition.Partition, ev.TopicPartition.Offset)
 				}
 			}
 		}
 	}()
 
-	
+	/*
 	// Produce messages to topic (asynchronously)
 	topic := "myTopic"
 	i := 0
@@ -47,9 +47,48 @@ func Produce(ctx context.Context) {
 		time.Sleep(time.Second * 5)
 		i++
 	}
+	*/
+
 	// Wait for message deliveries before shutting down
 
-	topicWithMulPart := "users3"
+	topicWithMulPart := "topic3"
+	p.Produce(&kafka.Message{TopicPartition: kafka.TopicPartition{
+		Topic:     &topicWithMulPart,
+		Partition: kafka.PartitionAny,
+	},
+		Value: []byte("value1"),
+		Key:   []byte("abc"),
+		Timestamp:      time.Time{},
+		TimestampType:  0,
+		Opaque:         nil,
+		Headers:        nil,
+	}, nil)
+
+	p.Produce(&kafka.Message{TopicPartition: kafka.TopicPartition{
+		Topic:     &topicWithMulPart,
+		Partition: kafka.PartitionAny,
+	},
+		Value: []byte("value2"),
+		Key:   []byte("pqr"),
+		Timestamp:      time.Time{},
+		TimestampType:  0,
+		Opaque:         nil,
+		Headers:        nil,
+	}, nil)
+
+	p.Produce(&kafka.Message{TopicPartition: kafka.TopicPartition{
+		Topic:     &topicWithMulPart,
+		Partition: kafka.PartitionAny,
+	},
+		Value: []byte("value3"),
+		Key:   []byte("xyz"),
+		Timestamp:      time.Time{},
+		TimestampType:  0,
+		Opaque:         nil,
+		Headers:        nil,
+	}, nil)
+
+	/*
 	j := 0
 	for j < 3 {
 		keyfield := "key"+ string(j)
@@ -69,6 +108,7 @@ func Produce(ctx context.Context) {
 		time.Sleep(3*time.Second)
 		j++
 	}
+	*/
 
 	p.Flush(15 * 1000)
 

@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"github.com/nilangekarss/trykafka"
+	"time"
 )
 
 
@@ -13,8 +14,9 @@ func main() {
 	// both the produce and consume functions are
 	// blocking
 	go trykafka.Produce(ctx)
-	go trykafka.Consume(ctx)
+	//go trykafka.Consume(ctx)
 	//trykafka.CreateTopic(ctx)
+	time.Sleep(5*time.Second)
 	trykafka.DescribeTopic(ctx)
 
 }

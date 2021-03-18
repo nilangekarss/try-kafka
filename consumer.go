@@ -14,7 +14,7 @@ func Consume(ctx context.Context) {
 	c, err := kafka.NewConsumer(&kafka.ConfigMap{
 		"bootstrap.servers": "localhost",
 		"group.id":          "myGroup",
-		"auto.offset.reset": "latest",//earliest
+		"auto.offset.reset": "earliest",//earliest, latest
 	})
 
 	if err != nil {
