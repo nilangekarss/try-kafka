@@ -66,6 +66,8 @@ func Produce(ctx context.Context) {
 			Opaque:         nil,
 			Headers:        nil,
 		},nil)
+		time.Sleep(3*time.Second)
+		j++
 	}
 
 	p.Flush(15 * 1000)
