@@ -54,10 +54,10 @@ func Produce(ctx context.Context) {
 	// Wait for message deliveries before shutting down
 
 	topicWithMulPart := "topic3"
-	key1 := "abc"
-	key2 := "pqr"
-	key3 := "xyz"
-	key4 := "clusterA"
+	//key1 := "abc"
+	//key2 := "pqr"
+	//key3 := "xyz"
+	//key4 := "clusterA"
 
 	count := 0
 	for count < 10 {
@@ -68,7 +68,7 @@ func Produce(ctx context.Context) {
 		Partition: kafka.PartitionAny,
 	},
 		Value: []byte("value1-" + string(count)),
-		Key:   []byte(key1),
+		//Key:   []byte(key1),
 		Timestamp:      time.Time{},
 		TimestampType:  0,
 		Opaque:         nil,
@@ -80,7 +80,7 @@ func Produce(ctx context.Context) {
 		Partition: kafka.PartitionAny,
 	},
 		Value: []byte("value2-"+ string(count)),
-		Key:   []byte(key2),
+		//Key:   []byte(key2),
 		Timestamp:      time.Time{},
 		TimestampType:  0,
 		Opaque:         nil,
@@ -92,7 +92,7 @@ func Produce(ctx context.Context) {
 		Partition: kafka.PartitionAny,
 	},
 		Value: []byte("value3-"+ string(count)),
-		Key:   []byte(key3),
+		//Key:   []byte(key3),
 		Timestamp:      time.Time{},
 		TimestampType:  0,
 		Opaque:         nil,
@@ -104,7 +104,7 @@ func Produce(ctx context.Context) {
 		Partition: kafka.PartitionAny,
 	},
 		Value: []byte("value4-"+ string(count)),
-		Key:   []byte(key4),
+		//Key:   []byte(key4),
 		Timestamp:      time.Time{},
 		TimestampType:  0,
 		Opaque:         nil,

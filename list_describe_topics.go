@@ -32,7 +32,7 @@ func DescribeTopic(ctx context.Context){
 	}
 	//here specify the resource type "any/topic/group/broker/else(becomes unknown)"
 	resourceType, err := confkafka.ResourceTypeFromString("topic")
-	resourceName := "users3"
+	resourceName := "topic3"
 
 	topics := getAllTopics(a)
 	fmt.Printf("\nTopics associated with broker are : %v", topics)
