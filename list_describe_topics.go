@@ -51,6 +51,7 @@ func DescribeTopic(ctx context.Context){
 		fmt.Printf("\nnum of partitions for topic %s are %d", k, numofpartitions)
 		for index, partitions := range v.Partitions{
 			fmt.Printf("\nid of partition is %d", partitions.ID)
+			fmt.Printf("\nleader of partition is %d", partitions.Leader)
 			fmt.Printf("\nindex and list of partitions are %s %#v", index, partitions)
 		}
 	}

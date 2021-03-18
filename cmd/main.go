@@ -13,8 +13,9 @@ func main() {
 	// both the produce and consume functions are
 	// blocking
 	go trykafka.Produce(ctx)
-	trykafka.Consume(ctx)
+	go trykafka.Consume(ctx)
 	//trykafka.CreateTopic(ctx)
 	trykafka.DescribeTopic(ctx)
+
 }
 
