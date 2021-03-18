@@ -27,7 +27,9 @@ func Produce(ctx context.Context) {
 				if ev.TopicPartition.Error != nil {
 					fmt.Printf("Delivery failed: %v\n", ev.TopicPartition)
 				} else {
-					fmt.Printf("Delivered message to partition%d and offset %d\n", ev.TopicPartition.Partition, ev.TopicPartition.Offset)
+					fmt.Printf("msg key and value is %s  %s", string(ev.Key), string(ev.Value))
+					fmt.Printf("Delivered message %s to partition%d and offset %d\n",
+						string(ev.Value), ev.TopicPartition.Partition, ev.TopicPartition.Offset)
 				}
 			}
 		}
