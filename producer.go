@@ -11,8 +11,6 @@ import (
 
 func Produce(ctx context.Context) {
 
-
-
 	p, err := kafka.NewProducer(&kafka.ConfigMap{"bootstrap.servers": "localhost"})
 
 	if err != nil {
@@ -49,10 +47,30 @@ func Produce(ctx context.Context) {
 		time.Sleep(time.Second * 5)
 		i++
 	}
-
-
 	// Wait for message deliveries before shutting down
+
+	topicWithMulPart := "users3"
+	j := 0
+	for j < 3 {
+		keyfield := "key"+ string(j)
+		valuedata := "value" + string(j)
+		p.Produce(&kafka.Message{
+			TopicPartition: kafka.TopicPartition{
+				Topic:     &topicWithMulPart,
+				Partition: kafka.PartitionAny,
+			},
+			Value: []byte(valuedata),
+			Key:   []byte(keyfield),
+			Timestamp:      time.Time{},
+			TimestampType:  0,
+			Opaque:         nil,
+			Headers:        nil,
+		},nil)
+	}
+
 	p.Flush(15 * 1000)
+
+
 }
 
 /*
